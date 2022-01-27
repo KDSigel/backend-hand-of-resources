@@ -68,7 +68,7 @@ describe('Bike backend routes', () => {
     };
 
     expect(res.body).toEqual(expected);
-    expect(Bike.getById(testBike.id)).toEqual(expected);
+    expect(await Bike.getById(testBike.id)).toEqual(expected);
   });
 
 });
