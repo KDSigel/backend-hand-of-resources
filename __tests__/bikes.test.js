@@ -15,7 +15,7 @@ describe('Bike backend routes', () => {
     pool.end();
   });
 
-  it('add a bike when I do a post?', async () => {
+  it('add a bike when I do a post', async () => {
     const res = await request(app).post('/api/v1/bikes/').send({
       model: 'dooobeeedoo',
       ride: false,
@@ -69,6 +69,17 @@ describe('Bike backend routes', () => {
 
     expect(res.body).toEqual(expected);
     expect(await Bike.getById(testBike.id)).toEqual(expected);
+  });
+
+  it('deletes a bike by id', async () => {
+    const res = await request(app).delete(`/api/v1/bikes/${testBike.id}`);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      model: 'Stumpjumper',
+      ride: false,
+      love: 10,
+    });
+    expect(await Bike.getById(testBike.id)).toEqual(null);
   });
 
 });
