@@ -5,7 +5,9 @@ const app = require('../lib/app');
 const Bike = require('../lib/models/Bike');
 
 describe('Bike backend routes', () => {
-  beforeEach(() => {
+  let testBike;
+  beforeEach(async () => {
+    [testBike] = await Bike.getAll();
     return setup(pool);
   });
 
@@ -42,5 +44,15 @@ describe('Bike backend routes', () => {
     });
   });
 
+
+  it('gets one bike when I do a get call with ID', async () => {
+    const res = await request(app).get(`/api/v1/bikes/${testBike.id}`);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      model: 'Stumpjumper',
+      ride: false,
+      love: 10,
+    });
+  });
 
 });
