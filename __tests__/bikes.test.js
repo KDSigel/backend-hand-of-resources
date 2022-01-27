@@ -34,12 +34,12 @@ describe('Bike backend routes', () => {
       love: 3, });
     const res = await request(app).get('/api/v1/bikes');
 
-    expect(res.body).toEqual([{
+    expect(res.body).toContainEqual({
       id: expect.any(String),
-      model: 'dooobeeedoo',
-      ride: false,
-      love: 4,
-    }]);
+      model: 'wahoooooo',
+      ride: true,
+      love: 3,
+    });
   });
 
 
