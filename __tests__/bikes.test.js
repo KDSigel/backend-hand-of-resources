@@ -77,7 +77,7 @@ describe('Bike backend routes', () => {
       id: expect.any(String),
       model: 'Stumpjumper',
       ride: false,
-      love: 10,
+      love: 10
     });
     expect(await Bike.getById(testBike.id)).toEqual(null);
   });
