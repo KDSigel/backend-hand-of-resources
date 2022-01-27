@@ -2,8 +2,9 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Bike = require('../lib/models/Bike');
 
-describe('backend routes', () => {
+describe('Bike backend routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
@@ -24,6 +25,22 @@ describe('backend routes', () => {
       ride: false,
       love: 4,
     });
-
   });
+
+  it('get all bikes when I do a get', async () => {
+    await Bike.insert({ 
+      model: 'wahoooooo',
+      ride: true,
+      love: 3, });
+    const res = await request(app).get('/api/v1/bikes');
+
+    expect(res.body).toEqual([{
+      id: expect.any(String),
+      model: 'dooobeeedoo',
+      ride: false,
+      love: 4,
+    }]);
+  });
+
+
 });
