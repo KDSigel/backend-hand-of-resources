@@ -30,10 +30,11 @@ describe('Bike backend routes', () => {
   });
 
   it('get all bikes when I do a get', async () => {
-    await Bike.insert({ 
+    await Bike.insert({
       model: 'wahoooooo',
       ride: true,
-      love: 3, });
+      love: 3,
+    });
     const res = await request(app).get('/api/v1/bikes');
 
     expect(res.body).toContainEqual({
@@ -44,7 +45,6 @@ describe('Bike backend routes', () => {
     });
   });
 
-
   it('gets one bike when I do a get call with ID', async () => {
     const res = await request(app).get(`/api/v1/bikes/${testBike.id}`);
     expect(res.body).toEqual({
@@ -53,6 +53,22 @@ describe('Bike backend routes', () => {
       ride: false,
       love: 10,
     });
+  });
+
+  it('updates the info for one bike', async () => {
+    const res = await request(app)
+      .patch(`/api/v1/bikes/${testBike.id}`)
+      .send({ love: 8 });
+
+    const expected = {
+      id: expect.any(String),
+      model: 'Stumpjumper',
+      ride: false,
+      love: 8,
+    };
+
+    expect(res.body).toEqual(expected);
+    expect(Bike.getById(testBike.id)).toEqual(expected);
   });
 
 });
