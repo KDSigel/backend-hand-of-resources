@@ -34,23 +34,23 @@ CREATE TABLE spirits (
 INSERT INTO spirits (category, brand, stocked)
 VALUES ('Scotch', 'Laphroaig', 'true');
 
-CREATE TABLE myths (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    title VARCHAR NOT NULL,
-    pervasiveness VARCHAR NOT NULL,
-    believability VARCHAR NOT NULL
-);
+-- CREATE TABLE myths (
+--     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+--     title VARCHAR NOT NULL,
+--     pervasiveness VARCHAR NOT NULL,
+--     believability VARCHAR NOT NULL
+-- );
 
-INSERT INTO myths (title, pervasiveness, believability)
-VALUES ('Trickel-down economics', 'medium', 'high');
+-- INSERT INTO myths (title, pervasiveness, believability)
+-- VALUES ('Trickel-down economics', 'medium', 'high');
 
-CREATE TABLE smells (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    title VARCHAR NOT NULL,
-    strength VARCHAR NOT NULL,
-    enjoyable BOOLEAN NOT NULL
-);
+-- CREATE TABLE smells (
+--     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+--     title VARCHAR NOT NULL,
+--     strength VARCHAR NOT NULL,
+--     enjoyable BOOLEAN NOT NULL
+-- );
 
-INSERT INTO smells (title, strength, enjoyable)
-VALUES ('garlic', 'medium', 'true');
+-- INSERT INTO smells (title, strength, enjoyable)
+-- VALUES ('garlic', 'medium', 'true');
 
