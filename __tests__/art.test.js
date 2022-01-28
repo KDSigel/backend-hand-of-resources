@@ -77,4 +77,16 @@ describe('Art backend routes', () => {
     expect(await Art.getById(testArt.id)).toEqual(expected);
   });
 
+  it('deletes art by id', async () => {
+    const res = await request(app).delete(`/api/v1/art/${testArt.id}`);
+    expect(res.body).toEqual({
+      id: '1',
+      title: 'drunkman',
+      theme: 'superhero, booze',
+      medium: 'oil paint',
+      worth: '$300.00',
+    });
+    expect(await Art.getById(testArt.id)).toEqual(null);
+  });
+
 });
