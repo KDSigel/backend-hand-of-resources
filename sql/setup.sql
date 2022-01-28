@@ -22,4 +22,4 @@ CREATE TABLE art (
 );
 
 INSERT INTO art (title, theme, medium, worth)
-VALUES ('drunkman', 'superhero, booze', 'oil paint', '$200.00');
+VALUES ('drunkman', 'superhero, booze', 'oil paint', '$300.00');

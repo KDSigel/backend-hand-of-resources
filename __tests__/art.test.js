@@ -20,14 +20,14 @@ describe('Art backend routes', () => {
       title: 'lalaladoobeedoooooo',
       theme: 'chaos, misery, sexuality',
       medium: 'sculpture',
-      worth: '$1,000,000',
+      worth: '$1,000,000.00',
     });
     expect(res.body).toEqual({
       id: expect.any(String),
       title: 'lalaladoobeedoooooo',
       theme: 'chaos, misery, sexuality',
       medium: 'sculpture',
-      worth: '$1,000,000',
+      worth: '$1,000,000.00',
     });
   });
 
