@@ -59,4 +59,22 @@ describe('Art backend routes', () => {
       worth: '$300.00',
     });
   });
+
+  it('updates the info for one piece of art', async () => {
+    const res = await request(app)
+      .patch(`/api/v1/art/${testArt.id}`)
+      .send({ worth: '$500.00' });
+
+    const expected = {
+      id: '1',
+      title: 'drunkman',
+      theme: 'superhero, booze',
+      medium: 'oil paint',
+      worth: '$500.00',
+    };
+
+    expect(res.body).toEqual(expected);
+    expect(await Art.getById(testArt.id)).toEqual(expected);
+  });
+
 });
