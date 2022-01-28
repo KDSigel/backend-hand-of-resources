@@ -5,7 +5,7 @@ const app = require('../lib/app');
 const Smell = require('../lib/models/Smell');
 
 describe('Smell backend routes', () => {
-//   let testSmell;
+  //   let testSmell;
   beforeEach(async () => {
     // [testSmell] = await Smell.getAll();
     return setup(pool);
@@ -31,9 +31,9 @@ describe('Smell backend routes', () => {
 
   it('gets all smells when I do a get', async () => {
     await Smell.insert({
-        title: 'carrots',
-        strength: 'minor',
-        enjoyable: 'yes',
+      title: 'carrots',
+      strength: 'minor',
+      enjoyable: true,
     });
     const res = await request(app).get('/api/v1/smells');
 
@@ -41,8 +41,7 @@ describe('Smell backend routes', () => {
       id: expect.any(String),
       title: 'carrots',
       strength: 'minor',
-      enjoyable: 'yes',
+      enjoyable: true,
     });
   });
-
 });
