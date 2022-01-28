@@ -55,4 +55,20 @@ describe('Art backend routes', () => {
     });
   });
 
+  it('updates one myth using id', async () => {
+    const res = await request(app)
+      .patch(`/api/v1/myths/${testMyth.id}`)
+      .send({ pervasiveness: 'strangely long-lasting' });
+
+    const expected = {
+      id: '1',
+      title: 'Trickel-down economics',
+      pervasiveness: 'strangely long-lasting',
+      believability: 'high',
+    };
+
+    expect(res.body).toEqual(expected);
+    expect(await Myth.getById(testMyth.id)).toEqual(expected);
+  });
+
 });
