@@ -5,9 +5,9 @@ const app = require('../lib/app');
 const Myth = require('../lib/models/Myth');
 
 describe('Art backend routes', () => {
-  // let testMyth;
+  let testMyth;
   beforeEach(async () => {
-    // [testMyth] = await Myth.getAll();
+    [testMyth] = await Myth.getAll();
     return setup(pool);
   });
 
@@ -45,6 +45,14 @@ describe('Art backend routes', () => {
     });
   });
 
+  it('gets one myth when I do a get call with ID', async () => {
+    const res = await request(app).get(`/api/v1/myths/${testMyth.id}`);
+    expect(res.body).toEqual({
+      id: '1',
+      title: 'Trickel-down economics',
+      pervasiveness: 'medium',
+      believability: 'high',
+    });
+  });
 
-  
 });
