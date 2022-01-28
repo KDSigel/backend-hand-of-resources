@@ -5,7 +5,7 @@ const app = require('../lib/app');
 const Spirit = require('../lib/models/Spirit');
 
 describe('Spirits backend routes', () => {
-    let testSpirit;
+  let testSpirit;
   beforeEach(async () => {
     [testSpirit] = await Spirit.getAll();
     return setup(pool);
@@ -55,4 +55,19 @@ describe('Spirits backend routes', () => {
     });
   });
 
+  it('updates the information for one spirit', async () => {
+    const res = await request(app)
+      .patch(`/api/v1/spirits/${testSpirit.id}`)
+      .send({ brand: 'Laphroaig 20yr' });
+
+    const expected = {
+      id: '1',
+      category: 'Scotch',
+      brand: 'Laphroaig 20yr',
+      stocked: true,
+    };
+
+    expect(res.body).toEqual(expected);
+    expect(await Spirit.getById(testSpirit.id)).toEqual(expected);
+  });
 });
