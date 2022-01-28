@@ -70,4 +70,15 @@ describe('Spirits backend routes', () => {
     expect(res.body).toEqual(expected);
     expect(await Spirit.getById(testSpirit.id)).toEqual(expected);
   });
+
+  it('deletes a spirit by id', async () => {
+    const res = await request(app).delete(`/api/v1/spirits/${testSpirit.id}`);
+    expect(res.body).toEqual({
+      id: '1',
+      category: 'Scotch',
+      brand: 'Laphroaig',
+      stocked: true,
+    });
+    expect(await Spirit.getById(testSpirit.id)).toEqual(null);
+  });
 });
