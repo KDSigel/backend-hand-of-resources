@@ -71,4 +71,15 @@ describe('Art backend routes', () => {
     expect(await Myth.getById(testMyth.id)).toEqual(expected);
   });
 
+  it('deletes a myth by id', async () => {
+    const res = await request(app).delete(`/api/v1/myths/${testMyth.id}`);
+    expect(res.body).toEqual({
+      id: '1',
+      title: 'Trickel-down economics',
+      pervasiveness: 'medium',
+      believability: 'high',
+    });
+    expect(await Myth.getById(testMyth.id)).toEqual(null);
+  });
+
 });
