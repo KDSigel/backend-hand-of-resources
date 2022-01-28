@@ -48,7 +48,7 @@ describe('Bike backend routes', () => {
   it('gets one bike when I do a get call with ID', async () => {
     const res = await request(app).get(`/api/v1/bikes/${testBike.id}`);
     expect(res.body).toEqual({
-      id: expect.any(String),
+      id: '1',
       model: 'Stumpjumper',
       ride: false,
       love: 10,

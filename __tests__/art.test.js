@@ -5,9 +5,9 @@ const app = require('../lib/app');
 const Art = require('../lib/models/Art');
 
 describe('Art backend routes', () => {
-  // let testart;
+  let testArt;
   beforeEach(async () => {
-    // [testart] = await Art.getAll();
+    [testArt] = await Art.getAll();
     return setup(pool);
   });
 
@@ -36,7 +36,7 @@ describe('Art backend routes', () => {
       title: 'famous in Tacoma',
       theme: 'the underbelly of society, wrath',
       medium: 'watercolor',
-      worth: '$37,000.00'
+      worth: '$37,000.00',
     });
     const res = await request(app).get('/api/v1/art');
 
@@ -45,8 +45,18 @@ describe('Art backend routes', () => {
       title: 'famous in Tacoma',
       theme: 'the underbelly of society, wrath',
       medium: 'watercolor',
-      worth: '$37,000.00'
+      worth: '$37,000.00',
     });
   });
 
+  it('gets one art piece when I do a get call with ID', async () => {
+    const res = await request(app).get(`/api/v1/art/${testArt.id}`);
+    expect(res.body).toEqual({
+      id: '1',
+      title: 'drunkman',
+      theme: 'superhero, booze',
+      medium: 'oil paint',
+      worth: '$300.00',
+    });
+  });
 });
