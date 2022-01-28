@@ -31,4 +31,22 @@ describe('Art backend routes', () => {
     });
   });
 
+  it('gets all art when I do a get', async () => {
+    await Art.insert({
+      title: 'famous in Tacoma',
+      theme: 'the underbelly of society, wrath',
+      medium: 'watercolor',
+      worth: '$37,000.00'
+    });
+    const res = await request(app).get('/api/v1/art');
+
+    expect(res.body).toContainEqual({
+      id: expect.any(String),
+      title: 'famous in Tacoma',
+      theme: 'the underbelly of society, wrath',
+      medium: 'watercolor',
+      worth: '$37,000.00'
+    });
+  });
+
 });
