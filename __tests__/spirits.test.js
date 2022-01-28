@@ -46,7 +46,7 @@ describe('Spirits backend routes', () => {
   });
 
   it('gets one spirit when I do a get call with ID', async () => {
-    const res = await request(app).get(`/api/v1/spirit/${testSpirit.id}`);
+    const res = await request(app).get(`/api/v1/spirits/${testSpirit.id}`);
     expect(res.body).toEqual({
       id: '1',
       category: 'Scotch',
