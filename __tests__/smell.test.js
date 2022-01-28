@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Smell = require('../lib/models/Smell');
 
 describe('Smell backend routes', () => {
 //   let testSmell;
@@ -18,13 +19,29 @@ describe('Smell backend routes', () => {
     const res = await request(app).post('/api/v1/smells/').send({
       title: 'carrots',
       strength: 'minor',
-      enjoyable: 'medium',
+      enjoyable: true,
     });
     expect(res.body).toEqual({
       id: expect.any(String),
       title: 'carrots',
       strength: 'minor',
-      enjoyable: 'medium',
+      enjoyable: true,
+    });
+  });
+
+  it('gets all smells when I do a get', async () => {
+    await Smell.insert({
+        title: 'carrots',
+        strength: 'minor',
+        enjoyable: 'yes',
+    });
+    const res = await request(app).get('/api/v1/smells');
+
+    expect(res.body).toContainEqual({
+      id: expect.any(String),
+      title: 'carrots',
+      strength: 'minor',
+      enjoyable: 'yes',
     });
   });
 
