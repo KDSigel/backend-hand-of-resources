@@ -5,9 +5,9 @@ const app = require('../lib/app');
 const Smell = require('../lib/models/Smell');
 
 describe('Smell backend routes', () => {
-  //   let testSmell;
+    let testSmell;
   beforeEach(async () => {
-    // [testSmell] = await Smell.getAll();
+    [testSmell] = await Smell.getAll();
     return setup(pool);
   });
 
@@ -44,4 +44,15 @@ describe('Smell backend routes', () => {
       enjoyable: true,
     });
   });
+
+  it('gets one smell when I do a get call with ID', async () => {
+    const res = await request(app).get(`/api/v1/smells/${testSmell.id}`);
+    expect(res.body).toEqual({
+      id: '1',
+      title: 'garlic',
+      strength: 'medium',
+      enjoyable: true,
+    });
+  });
+
 });
