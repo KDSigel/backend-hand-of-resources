@@ -7,6 +7,7 @@ const Art = require('../lib/models/Art');
 describe('Art backend routes', () => {
   let testArt;
   beforeEach(async() => {
+    
     await setup(pool);
     [testArt] = await Art.getAll();
   });
@@ -50,7 +51,7 @@ describe('Art backend routes', () => {
   });
 
   it('gets one art piece when I do a get call with ID', async () => {
-    const res = await request(app).get(`/api/v1/art/${testArt.id}`);
+    const res = await request(app).get('/api/v1/art/1');
     expect(res.body).toEqual({
       id: '1',
       title: 'drunkman',
@@ -62,7 +63,7 @@ describe('Art backend routes', () => {
 
   it('updates the info for one piece of art', async () => {
     const res = await request(app)
-      .patch(`/api/v1/art/${testArt.id}`)
+      .patch('/api/v1/art/1')
       .send({ worth: '$500.00' });
 
     const expected = {
@@ -78,7 +79,7 @@ describe('Art backend routes', () => {
   });
 
   it('deletes art by id', async () => {
-    const res = await request(app).delete(`/api/v1/art/${testArt.id}`);
+    const res = await request(app).delete('/api/v1/art/1');
     expect(res.body).toEqual({
       id: '1',
       title: 'drunkman',
@@ -86,7 +87,7 @@ describe('Art backend routes', () => {
       medium: 'oil paint',
       worth: '$300.00',
     });
-    expect(await Art.getById(testArt.id)).toEqual(null);
+    expect(await Art.getById(1)).toEqual(null);
   });
 
 });
