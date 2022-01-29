@@ -5,7 +5,7 @@ const app = require('../lib/app');
 const Smell = require('../lib/models/Smell');
 
 describe('Smell backend routes', () => {
-    let testSmell;
+  let testSmell;
   beforeEach(async () => {
     [testSmell] = await Smell.getAll();
     return setup(pool);
@@ -81,5 +81,4 @@ describe('Smell backend routes', () => {
     });
     expect(await Smell.getById(testSmell.id)).toEqual(null);
   });
-
 });

@@ -6,9 +6,9 @@ const Art = require('../lib/models/Art');
 
 describe('Art backend routes', () => {
   let testArt;
-  beforeEach(() => {
-    // [testArt] = await Art.getAll();
-    return setup(pool);
+  beforeEach(async() => {
+    await setup(pool);
+    [testArt] = await Art.getAll();
   });
 
   afterAll(() => {
