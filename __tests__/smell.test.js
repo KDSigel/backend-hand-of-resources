@@ -55,4 +55,31 @@ describe('Smell backend routes', () => {
     });
   });
 
+  it('updates one smell using id', async () => {
+    const res = await request(app)
+      .patch(`/api/v1/smells/${testSmell.id}`)
+      .send({ strength: 'hardly' });
+
+    const expected = {
+      id: '1',
+      title: 'garlic',
+      strength: 'hardly',
+      enjoyable: true,
+    };
+
+    expect(res.body).toEqual(expected);
+    expect(await Smell.getById(testSmell.id)).toEqual(expected);
+  });
+
+  it('deletes a smell by id', async () => {
+    const res = await request(app).delete(`/api/v1/smells/${testSmell.id}`);
+    expect(res.body).toEqual({
+      id: '1',
+      title: 'garlic',
+      strength: 'medium',
+      enjoyable: true,
+    });
+    expect(await Smell.getById(testSmell.id)).toEqual(null);
+  });
+
 });
